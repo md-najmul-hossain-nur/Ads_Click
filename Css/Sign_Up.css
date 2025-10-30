@@ -1,0 +1,80 @@
+/* Global reset + base */
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #333;
+}
+
+/* Header (slightly shorter and compact) */
+.site-header {
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 14px 20px; /* ↓ slightly reduced padding */
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 68px; /* ↓ was 84px */
+}
+
+.logo {
+  width: 72px;  /* ↓ smaller logo */
+  height: 72px;
+  display: block;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.brand-title {
+  font-weight: 700;
+  color: #2d6cdf;
+  font-size: 18px; /* ↓ slightly smaller text */
+  letter-spacing: 0.2px;
+}
+
+.brand-sub {
+  font-size: 12px; /* ↓ slightly smaller */
+  color: #666;
+  margin-top: 2px;
+}
+
+/* Header Navigation */
+.header-nav {
+  margin-left: auto;
+}
+
+.header-nav .register-link {
+  text-decoration: none;
+  color: #2d6cdf;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 6px 10px; /* ↓ slightly reduced padding */
+  border-radius: 6px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.header-nav .register-link:hover {
+  background: rgba(45, 108, 223, 0.08);
+  text-decoration: none;
+}

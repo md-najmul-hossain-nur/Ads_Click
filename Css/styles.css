@@ -1,0 +1,224 @@
+/* Global reset + base */
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #333;
+}
+
+/* Header (slightly shorter and compact) */
+.site-header {
+  width: 100%;
+  background: #ffffff;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.header-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 14px 20px; /* ↓ slightly reduced padding */
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 68px; /* ↓ was 84px */
+}
+
+.logo {
+  width: 72px;  /* ↓ smaller logo */
+  height: 72px;
+  display: block;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.brand-title {
+  font-weight: 700;
+  color: #2d6cdf;
+  font-size: 18px; /* ↓ slightly smaller text */
+  letter-spacing: 0.2px;
+}
+
+.brand-sub {
+  font-size: 12px; /* ↓ slightly smaller */
+  color: #666;
+  margin-top: 2px;
+}
+
+/* Header Navigation */
+.header-nav {
+  margin-left: auto;
+}
+
+.header-nav .register-link {
+  text-decoration: none;
+  color: #2d6cdf;
+  font-weight: 600;
+  font-size: 15px;
+  padding: 6px 10px; /* ↓ slightly reduced padding */
+  border-radius: 6px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.header-nav .register-link:hover {
+  background: rgba(45, 108, 223, 0.08);
+  text-decoration: none;
+}
+
+/* Main content (center the login box) */
+.main-content {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px; /* ↓ reduced top/bottom padding */
+  flex: 1;
+}
+
+/* Login container */
+.login-container {
+  background-color: #fff;
+  padding: 26px; /* ↓ slightly less padding */
+  width: 340px;  /* ↓ slightly narrower */
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.login-container h2 {
+  margin: 0 0 16px;
+  font-size: 17px; /* ↓ slightly smaller */
+  font-weight: 700;
+  color: #333;
+  text-align: center;
+}
+
+/* Form inputs */
+.login-form input[type="text"],
+.login-form input[type="password"]{
+  width: 100%;
+  padding: 9px; /* ↓ slightly smaller */
+  margin: 6px 0 12px 0;
+  border: 1px solid #d2d6db;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 14px;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.login-form input:focus
+{
+  border-color: #2d6cdf;
+  box-shadow: 0 0 0 3px rgba(45, 108, 223, 0.15);
+  outline: none;
+}
+
+/* Buttons */
+.btn-primary,
+.btn-secondary {
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 10px; /* ↓ slightly reduced */
+  background-color: #2d6cdf;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background-color: #1c4fa3;
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  width: 28%;
+  padding: 8px; /* ↓ slightly smaller */
+  background-color: #eaf2ff;
+  color: #2d6cdf;
+}
+
+.btn-secondary:hover {
+  background-color: #d6e8ff;
+}
+
+.btn-secondary:active {
+  transform: scale(0.98);
+}
+
+/* Forgot password area */
+.forgot-password {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+/* Accessibility utility */
+.visually-hidden {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+/* Responsive adjustments */
+@media (max-width: 700px) {
+  .header-inner {
+    padding: 10px 14px;
+    min-height: 58px; /* ↓ compact on mobile */
+    gap: 8px;
+  }
+
+  .logo {
+    width: 48px;
+    height: 48px;
+  }
+
+  .brand-title {
+    font-size: 16px;
+  }
+
+  .main-content {
+    padding: 30px 16px;
+  }
+
+  .login-container {
+    width: 92%;
+    padding: 20px;
+  }
+
+  .forgot-password {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .forgot-password input[type="email"],
+  .btn-secondary {
+    width: 100%;
+  }
+}
