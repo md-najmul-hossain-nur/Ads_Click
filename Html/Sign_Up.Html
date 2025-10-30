@@ -1,27 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Login Form</title>
-    <link rel="stylesheet" href="../Css/Sign_Up.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Account Signup — Ads Click</title>
+  <link rel="stylesheet" href="../Css/Sign_Up.css" />
 </head>
 <body>
 
 <header class="site-header">
-    <div class="header-inner">
-    
-        <img
-            class="logo"
-            src="../Images/logo.png"
-            alt="Site logo"
-        />
-        <div class="brand">
-            <span class="brand-title">Ads Click</span>
-            <span class="brand-tagline">Boost Your Reach</span>
-        </div>
-        <nav class="header-nav">
-            <a class="register-link" href="../Html/Sign_Up.Html">Register</a>
-        </nav>
+  <div class="header-inner">
+    <img class="logo" src="../Images/logo.png" alt="Ads Click logo">
+    <div class="brand">
+      <span class="brand-title">Ads Click</span>
+      <span class="brand-tagline">Boost Your Reach</span>
     </div>
+    <nav class="header-nav">
+      <a class="register-link" href="../Html/Login.html">Login</a>
+    </nav>
+  </div>
 </header>
+
+<main class="signup-main">
+  <h1>ACCOUNT SIGNUP</h1>
+  <div class="signup-container">
+
+    <!-- Account Details -->
+    <section class="form-section">
+      <h2>ACCOUNT DETAILS</h2>
+      <form class="signup-form" action="/signup" method="post" novalidate>
+        <label>Account Type</label>
+        <select name="account_type" required>
+          <option value="advertiser">Advertiser</option>
+          <option value="publisher">Publisher</option>
+        </select>
+
+        <label>E-mail: *</label>
+        <input type="email" name="email" placeholder="Your email address" required>
+
+        <label>Username: *</label>
+        <input type="text" name="username" placeholder="Your username" required>
+
+        <label>Password: *</label>
+        <input type="password" name="password" placeholder="Your password" required>
+
+        <label>Confirm: *</label>
+        <input type="password" name="confirm" placeholder="Confirm Password" required>
+
+        <label>First Name: *</label>
+        <input type="text" name="first_name" placeholder="User First Name" required>
+
+        <label>Last Name: *</label>
+        <input type="text" name="last_name" placeholder="User Last Name" required>
+
+        <label>Phone:</label>
+        <input type="tel" name="phone" placeholder="User Phone Number">
+
+        <label>Skype Name:</label>
+        <input type="text" name="skype" placeholder="User Skype Name">
+      </form>
+    </section>
+
+    <!-- User Details -->
+    <section class="form-section">
+      <h2>USER DETAILS</h2>
+
+      <form>
+        <label>Company: *</label>
+        <input type="text" name="company" placeholder="Your Company Name" required>
+
+        <label>VAT:</label>
+        <input type="text" name="vat" placeholder="Company VAT Number">
+
+        <label>Country:</label>
+        <input type="text" name="country" placeholder="Your Country">
+
+        <label>Address:</label>
+        <input type="text" name="address" placeholder="Your Street Address">
+
+        <label>City:</label>
+        <input type="text" name="city" placeholder="Your City">
+
+        <div class="inline-fields">
+          <div>
+            <label>State/Province:</label>
+            <input type="text" name="state" placeholder="Your State">
+          </div>
+          <div>
+            <label>ZIP:</label>
+            <input type="text" name="zip" placeholder="Zip Code">
+          </div>
+        </div>
+
+              <button type="submit" class="btn-primary">SIGN UP</button>
+      </form>
+    </section>
+
+  </div>
+</main>
+
+</body>
+</html>

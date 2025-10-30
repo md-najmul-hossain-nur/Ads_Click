@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="../Css/DashBoard_User.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+</head>
+
+<body>
+  <!-- ===== Top Header ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <img class="logo" src="../Images/logo.png" alt="Site logo" />
+
+      <div class="brand">
+        <span class="brand-title">Ads Click</span>
+        <span class="brand-tagline">Boost Your Reach</span>
+      </div>
+
+      <nav class="header-nav">
+         <div class="top-right">
+      <span class="user-icon"><i class="fa-solid fa-user"></i></span>
+      <span class="company-name">3D Tech Limited </span>
+    </div>
+        <button class="logout-btn">Logout</button>
+      </nav>
+    </div>
+
+    <!-- ===== Navigation ===== -->
+    <nav class="nav-bar" aria-label="Main navigation">
+      <ul>
+        <li><a href="#"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+        <li><a href="#"><i class="fa-solid fa-user"></i> My Profile</a></li>
+        <li><a href="#"><i class="fa-solid fa-chart-line"></i> Reports</a></li>
+        <li><a href="#"><i class="fa-solid fa-book"></i> Documentation</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- top-bar-extra moved out of header -->
+  <div class="top-bar-extra">
+    <div class="server-time">
+      Server Time: <span id="time"></span>
+    </div>
+  </div>
+
+  <!-- ===== Dashboard Main Content ===== -->
+  <main class="dashboard-main">
+    <!-- Statistic Boxes -->
+    <div class="stats-boxes">
+      <div class="box purple">
+        <div class="box-content">
+          <i class="fa-solid fa-money-bill-wave"></i>
+          <div>
+            <p>Today Revenue:</p>
+            <button>Show Statistics <i class="fa-solid fa-circle-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="box green">
+        <div class="box-content">
+          <i class="fa-solid fa-money-bill-wave"></i>
+          <div>
+            <p>Yesterday Revenue:</p>
+            <button>Show Statistics <i class="fa-solid fa-circle-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="box red">
+        <div class="box-content">
+          <i class="fa-solid fa-users"></i>
+          <div>
+            <p>Account ID: <strong>174</strong></p>
+            <button>View Accounts <i class="fa-solid fa-circle-arrow-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chart + Notification Section -->
+    <div class="data-section">
+      <div class="chart-area">
+        <h3><i class="fa-solid fa-chart-column"></i> Statistics for last 7 Days</h3>
+        <div class="chart-box">Daily Revenue</div>
+      </div>
+
+      <div class="notifications">
+        <h3><i class="fa-solid fa-bell"></i> Notifications Panel</h3>
+        <p>
+          The data provided herein is <strong>ESTIMATED</strong>. It complies with the
+          terms and conditions in the agreement. Final amount will be reconciled once we
+          get the report from our upstream partner (the revenue does not reflect certain
+          adjustments done by the upstream partner). If you have any questions, or would
+          like information on other feeds, please feel free to contact us.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Update server time dynamically
+    setInterval(() => {
+      document.getElementById("time").innerText = new Date().toLocaleString();
+    }, 1000);
+  </script>
+</body>
+</html>

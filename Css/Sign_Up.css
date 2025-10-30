@@ -78,3 +78,131 @@ body {
   background: rgba(45, 108, 223, 0.08);
   text-decoration: none;
 }
+
+/* ========== Main Content ========== */
+.signup-main {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.signup-main h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #444;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+/* ========== Form Container ========== */
+.signup-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+/* ========== Form Section ========== */
+.form-section {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: #fafafa;
+  padding: 20px 25px;
+}
+
+.form-section h2 {
+  font-size: 1rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #444;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 8px;
+}
+
+/* ========== Input Fields ========== */
+.signup-form,
+.form-section form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 8px 0 4px;
+  font-weight: 600;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 0.95rem;
+  color: #333;
+  background: #fff;
+  transition: border-color 0.2s;
+}
+
+input:focus,
+select:focus {
+  border-color: #0077cc;
+  outline: none;
+}
+
+/* Inline fields for State + ZIP */
+.inline-fields {
+  display: flex;
+  gap: 10px;
+}
+
+.inline-fields div {
+  flex: 1;
+}
+
+/* ========== Checkbox Area ========== */
+.checkboxes {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.checkboxes a {
+  color: #0077cc;
+  text-decoration: none;
+}
+
+.checkboxes a:hover {
+  text-decoration: underline;
+}
+
+/* ========== Submit Button ========== */
+.btn-primary {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background-color: #6da9d2;
+  border: none;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: #5b93bb;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 900px) {
+  .signup-container {
+    grid-template-columns: 1fr;
+  }
+}
