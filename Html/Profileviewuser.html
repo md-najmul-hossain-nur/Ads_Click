@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dashboard</title>
-  <link rel="stylesheet" href="../Css/Profile_user.css" />
+  <link rel="stylesheet" href="../Css/profileViewUser.css" />
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
@@ -37,7 +37,347 @@
         <li><a href="../Html/DashBoard_User.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
         <li><a href="../Html/Profile_user.html"><i class="fa-solid fa-user"></i> My Profile</a></li>
         <li><a href="../Html/report_user.html"><i class="fa-solid fa-chart-line"></i> Reports</a></li>
+        <li><a href="../Html/User_searchFeeds.html"><i class="fa-solid fa-book"></i>   Search Feeds</a></li>
         <li><a href="../Html/Documentation_user.html"><i class="fa-solid fa-book"></i> Documentation</a></li>
       </ul>
     </nav>
   </header>
+  
+  <!-- ===== Page Heading ===== -->
+  <div class="page-heading">
+    <h1>My Accounts</h1>
+  </div>
+
+  <!-- ===== Breadcrumb ===== -->
+  <div class="breadcrumb" aria-label="Breadcrumb">
+    <a href="#">My Profile</a> / <span aria-current="page">My Accounts</span>
+  </div>
+
+  <!-- ===== Main Content ===== -->
+  <main class="container" id="mainContent" tabindex="-1">
+    <h2 id="accountsHeading">My Accounts</h2>
+
+    <table class="accounts-table" aria-describedby="accountsTitle" summary="List of affiliate accounts and backfill configuration">
+      <caption id="accountsTitle" class="visually-hidden">Accounts table showing affiliate accounts and backfill URLs</caption>
+      <thead>
+        <tr>
+          <th scope="col">Affiliate ID</th>
+          <th scope="col">Type ID</th>
+          <th scope="col">Source</th>
+          <th scope="col">QPS Limit</th>
+          <th scope="col">Search Cap</th>
+          <th scope="col">Balance</th>
+          <th scope="col">Backfill URL</th>
+          <th scope="col">Status</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td data-label="Affiliate ID">174</td>
+          <td data-label="Type ID">174</td>
+          <td data-label="Source">LLO</td>
+          <td data-label="QPS Limit"><span class="badge badge-unlimited">Unlimited</span></td>
+          <td data-label="Search Cap"><span class="badge badge-unlimited">Unlimited</span></td>
+          <td data-label="Balance">0</td>
+          <td data-label="Backfill URL" class="backfill-cell">
+            <a href="https://www.winkitsearch.com/login.php?module=Members&action=accounts#" target="_blank" rel="noopener noreferrer">
+              https://www.winkitsearch.com/login.php?module=Members&action=accounts#
+            </a>
+          </td>
+          <td data-label="Status"><span class="badge badge-active">Active</span></td>
+          <td data-label="Action">
+            <!-- Edit button — multiple rows supported -->
+            <button class="edit-btn" type="button" aria-haspopup="dialog" aria-label="Edit account 174" title="Edit account">
+              <i class="fa-solid fa-pen" aria-hidden="true"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </main>
+
+  <!-- ===== Edit Modal ===== -->
+  <div id="editModal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-backdrop" data-dismiss="close"></div>
+
+    <div class="modal-panel" role="document" aria-describedby="modalDesc">
+      <button class="modal-close" aria-label="Close dialog" data-dismiss="close">✕</button>
+
+      <header class="modal-header">
+        <h3 id="modalTitle">Edit Account</h3>
+        <p id="modalDesc" class="visually-hidden">Edit the account display name and backfill URL. The URL must be an http or https URL.</p>
+      </header>
+
+      <form id="editForm" class="modal-body" novalidate>
+        <label class="field">
+          <div class="field-label">Account Name</div>
+          <input id="accountName" name="accountName" type="text" autocomplete="off" />
+        </label>
+
+        <label class="field">
+          <div class="field-label">Backfill URL</div>
+          <input id="backfillUrl" name="backfillUrl" type="url" placeholder="https://example.com/path?..." />
+          <div id="urlError" class="error" role="alert" aria-hidden="true">Please enter a valid http or https URL, or leave blank to remove.</div>
+        </label>
+
+        <div class="macros" aria-label="Available macros">
+          <table>
+            <thead>
+              <tr><th>Macros</th><th>Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>[uid]</code></td><td>Account ID</td></tr>
+              <tr><td><code>[tid]</code></td><td>Type ID</td></tr>
+              <tr><td><code>[subid]</code></td><td>SubID</td></tr>
+              <tr><td><code>[ip]</code></td><td>Remote IP</td></tr>
+              <tr><td><code>[geo]</code></td><td>Country Code</td></tr>
+              <tr><td><code>[ref]</code></td><td>Referrer</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <footer class="modal-actions">
+          <button type="button" class="btn secondary" data-dismiss="close">Close</button>
+          <button type="submit" class="btn primary">Save</button>
+        </footer>
+      </form>
+    </div>
+  </div>
+
+<script>
+
+
+(function () {
+  // Helpers
+  const qs = (sel, ctx = document) => ctx.querySelector(sel);
+  const qsa = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
+
+  let lastFocused = null;
+  let currentRow = null;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = qs('#editModal');
+    if (!modal) return;
+
+    const form = qs('#editForm', modal);
+    const accountNameInput = qs('#accountName', modal);
+    const backfillUrlInput = qs('#backfillUrl', modal);
+    const urlError = qs('#urlError', modal);
+    const closeTriggers = qsa('[data-dismiss="close"]', modal);
+    const editButtons = qsa('.edit-btn');
+
+    // Open modal when any edit button is clicked (supports multiple rows)
+    editButtons.forEach(btn => {
+      btn.addEventListener('click', (ev) => {
+        const tr = ev.currentTarget.closest('tr');
+        openModalForRow(tr, modal, accountNameInput, backfillUrlInput, urlError);
+      });
+    });
+
+    // Close buttons
+    closeTriggers.forEach(btn => {
+      btn.addEventListener('click', () => closeModal(modal));
+    });
+
+    // Click on backdrop to close
+    const backdrop = qs('.modal-backdrop', modal);
+    if (backdrop) {
+      backdrop.addEventListener('click', () => closeModal(modal));
+    }
+
+    // Keyboard: ESC to close, trap focus when open
+    document.addEventListener('keydown', (ev) => {
+      if (modal.getAttribute('aria-hidden') === 'false') {
+        if (ev.key === 'Escape' || ev.key === 'Esc') {
+          ev.preventDefault();
+          closeModal(modal);
+        } else if (ev.key === 'Tab') {
+          trapFocus(ev, modal);
+        }
+      }
+    });
+
+    // Submit handler: validate and update table row cells
+    form.addEventListener('submit', (ev) => {
+      ev.preventDefault();
+      const urlValue = backfillUrlInput.value.trim();
+
+      // Validate URL if present
+      if (urlValue.length && !isValidHttpUrl(urlValue)) {
+        // show inline feedback
+        backfillUrlInput.setAttribute('aria-invalid', 'true');
+        urlError.setAttribute('aria-hidden', 'false');
+        backfillUrlInput.focus();
+        return;
+      } else {
+        backfillUrlInput.removeAttribute('aria-invalid');
+        urlError.setAttribute('aria-hidden', 'true');
+      }
+
+      if (currentRow) {
+        // Update the Backfill URL cell: set anchor href/text if anchor exists, otherwise replace text
+        const backfillCell = currentRow.querySelector('[data-label="Backfill URL"]');
+        if (backfillCell) {
+          const anchor = backfillCell.querySelector('a');
+          if (anchor) {
+            // If empty, remove anchor and set text node instead
+            if (urlValue.length === 0) {
+              anchor.remove();
+              backfillCell.textContent = '';
+            } else {
+              // Use setAttribute to preserve the provided string rather than using .href (which resolves to absolute)
+              anchor.setAttribute('href', urlValue);
+              anchor.textContent = urlValue;
+              anchor.setAttribute('target', '_blank');
+              anchor.setAttribute('rel', 'noopener noreferrer');
+            }
+          } else {
+            if (urlValue.length === 0) {
+              backfillCell.textContent = '';
+            } else {
+              const a = document.createElement('a');
+              a.setAttribute('href', urlValue);
+              a.setAttribute('target', '_blank');
+              a.setAttribute('rel', 'noopener noreferrer');
+              a.textContent = urlValue;
+              backfillCell.textContent = '';
+              backfillCell.appendChild(a);
+            }
+          }
+        }
+
+        // Optionally update an account-name column if present.
+        const accountNameCell = currentRow.querySelector('[data-label="Account Name"]');
+        if (accountNameCell && accountNameInput) {
+          accountNameCell.textContent = accountNameInput.value.trim();
+        }
+      }
+
+      closeModal(modal);
+    });
+  });
+
+  // Open modal for a given table row and populate form fields
+  function openModalForRow(tr, modal, accountNameInput, backfillUrlInput, urlError) {
+    if (!tr) return;
+    currentRow = tr;
+
+    // Save last focused element to restore on close
+    lastFocused = document.activeElement;
+
+    // Fill account name: try to infer from table columns (Affiliate ID and Source)
+    const affiliate = textFromCell(tr, 'Affiliate ID');
+    const source = textFromCell(tr, 'Source');
+    if (accountNameInput) {
+      accountNameInput.value = ''; // default empty
+      if (affiliate && source) {
+        accountNameInput.value = `${affiliate} — ${source}`;
+      } else if (affiliate) {
+        accountNameInput.value = affiliate;
+      } else if (source) {
+        accountNameInput.value = source;
+      }
+    }
+
+    // Fill backfill URL (prefer the attribute value if anchor present, otherwise text content)
+    const backfillCell = tr.querySelector('[data-label="Backfill URL"]');
+    let backfill = '';
+    if (backfillCell) {
+      const a = backfillCell.querySelector('a');
+      if (a) {
+        // Prefer the originally-set href attribute (may be relative or as originally authored)
+        backfill = a.getAttribute('href') || a.textContent.trim() || '';
+      } else {
+        backfill = backfillCell.textContent.trim();
+      }
+    }
+    if (backfillUrlInput) backfillUrlInput.value = backfill;
+
+    // Reset validation UI
+    if (urlError) urlError.setAttribute('aria-hidden', 'true');
+    if (backfillUrlInput) backfillUrlInput.removeAttribute('aria-invalid');
+
+    // Show modal (update aria-hidden and add class for styling)
+    modal.setAttribute('aria-hidden', 'false');
+    modal.classList.add('is-open');
+
+    // Move focus into the modal
+    const focusable = getFocusable(modal);
+    const initial = (focusable[0] || accountNameInput || backfillUrlInput);
+    if (initial && typeof initial.focus === 'function') {
+      initial.focus();
+    }
+  }
+
+  function closeModal(modal) {
+    if (!modal) return;
+    modal.setAttribute('aria-hidden', 'true');
+    modal.classList.remove('is-open');
+
+    // restore focus
+    try {
+      (lastFocused || document.body).focus();
+    } catch (e) { /* ignore */ }
+
+    currentRow = null;
+  }
+
+  // Utility: get inner text of a td with data-label matching label (case-sensitive)
+  function textFromCell(tr, label) {
+    const td = tr.querySelector(`[data-label="${label}"]`);
+    return td ? td.textContent.trim() : '';
+  }
+
+  // Validate HTTP/HTTPS URL
+  function isValidHttpUrl(string) {
+    try {
+      const url = new URL(string, window.location.href);
+      return url.protocol === 'http:' || url.protocol === 'https:';
+    } catch (err) {
+      return false;
+    }
+  }
+
+  // Focus trap: keep tab within modal
+  function trapFocus(ev, modal) {
+    const focusable = getFocusable(modal);
+    if (focusable.length === 0) {
+      ev.preventDefault();
+      return;
+    }
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    const active = document.activeElement;
+
+    if (ev.shiftKey && active === first) {
+      ev.preventDefault();
+      last.focus();
+    } else if (!ev.shiftKey && active === last) {
+      ev.preventDefault();
+      first.focus();
+    }
+  }
+
+  // Get focusable elements within an element
+  function getFocusable(container) {
+    const selectors = [
+      'a[href]:not([tabindex^="-"]):not([disabled])',
+      'button:not([disabled])',
+      'textarea:not([disabled])',
+      'input:not([type="hidden"]):not([disabled])',
+      'select:not([disabled])',
+      '[tabindex]:not([tabindex^="-"])'
+    ];
+    return Array.from(container.querySelectorAll(selectors.join(',')))
+      .filter(el => {
+        // Only include visible elements
+        const rects = el.getClientRects();
+        return rects.length > 0 && window.getComputedStyle(el).visibility !== 'hidden';
+      });
+  }
+})();
+</script>
+</body>
+</html>

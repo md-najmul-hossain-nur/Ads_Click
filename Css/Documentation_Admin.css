@@ -1,17 +1,7 @@
-/* Profile_admin.css
-   Consolidated, cleaned and improved styles for Admin header, nav, and documentation page.
-   - Merged duplicate variables
-   - Removed duplicated resets
-   - Improved accessibility (focus states)
-   - Cleaner responsive behavior and smaller CSS footprint
-*/
 
-/* -------------------------
-   Theme tokens (single source)
-   ------------------------- */
 :root {
   /* Layout / sizing */
-  --max-width: 1200px;
+  --max-width: 1400px;
   --header-height: 86px;
   --nav-height: 56px;
   --radius-sm: 4px;

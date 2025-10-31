@@ -250,8 +250,8 @@ html,body{
   --pill-bg:#12b886;
   --radius:4px;
   --gap:18px;
-  --max-width:1200px;
-  --label-width:160px;
+  --max-width:1400px;
+  --label-width:260px;
 }
 
 *{box-sizing:border-box}
@@ -284,10 +284,6 @@ body{
   align-items:start;
 }
 
-/* columns */
-.col{min-width:0}
-.col.left {}
-.col.right {}
 
 /* panel */
 .panel{

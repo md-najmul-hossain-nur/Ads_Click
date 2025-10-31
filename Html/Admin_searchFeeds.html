@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="../Css/Admin_searchFeeds.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+</head>
+
+<body>
+  <!-- ===== Top Header ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <img class="logo" src="../Images/logo.png" alt="Site logo" />
+
+      <div class="brand">
+        <span class="brand-title">Ads Click</span>
+        <span class="brand-tagline">Boost Your Reach</span>
+      </div>
+
+      <nav class="header-nav">
+         <div class="top-right">
+      <span class="user-icon"><i class="fa-solid fa-user"></i></span>
+      <span class="company-name">3D Tech Limited </span>
+    </div>
+        <button class="logout-btn">Logout</button>
+      </nav>
+    </div>
+
+    <!-- ===== Navigation ===== -->
+    <nav class="nav-bar" aria-label="Main navigation">
+    <ul>
+      <li><a href="../Html/DashBoard_Admin.Html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+      <li><a href="../Html/Profile_admin.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+      <li><a href="../Html/Report_Admin.html"><i class="fa-solid fa-chart-line"></i> Reports</a></li>
+  <li><a href="../Html/Admin_searchFeeds.html"><i class="fa-solid fa-book"></i>   Search Feeds</a></li>
+      <li><a href="../Html/Documentation_Admin.html"><i class="fa-solid fa-book"></i> Documentation </a></li>
+    </ul>
+  </nav>
+  </header>
+
+
+  <!-- ===== PAGE CONTENT ===== -->
+  <div class="page">
+    <div class="breadcrumb">Search Feeds / Search Feeds</div>
+    <h1 class="page-title">Search Feeds</h1>
+
+    <div class="panel" role="region" aria-labelledby="accountsHeading">
+      <div class="panel-header" id="accountsHeading">My Accounts</div>
+
+      <div class="table-wrap">
+        <table class="feeds" role="table" aria-label="Search feeds table">
+          <thead>
+            <tr>
+              <th scope="col">Account</th>
+              <th scope="col">Feed ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Engine</th>
+              <th scope="col">Type Search</th>
+              <th scope="col">Type</th>
+              <th scope="col">Integration</th>
+              <th scope="col">Search Cap</th>
+              <th scope="col">Status</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Example Row -->
+            <tr>
+              <td><span class="account-label">[174] - LLO</span></td>
+              <td>652</td>
+              <td>N2S_yahoo_US_FB_2k</td>
+              <td>Yahoo</td>
+              <td>Native</td>
+              <td>Paid</td>
+              <td>Direct</td>
+              <td><span class="badge unlimited">Unlimited</span></td>
+              <td><span class="status">Active</span></td>
+              <td><button class="btn endpoints" aria-label="View endpoints for feed 652"><i class="fa-solid fa-link"></i> Endpoints</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Endpoints Modal ===== -->
+  <div id="endpointModal" class="modal" aria-hidden="true">
+    <div class="modal-panel">
+      <button class="modal-close" aria-label="Close dialog" data-dismiss="close">✕</button>
+
+      <header class="modal-header">
+        <h3 id="feedTitle">Feed Endpoints</h3>
+      </header>
+
+      <section class="modal-body">
+        <label class="field">
+          <div class="field-label">Feed Link</div>
+          <div class="feed-link-box">
+            <input id="feedUrl" type="text" readonly />
+            <button class="url-btn" disabled>URL</button>
+          </div>
+        </label>
+
+        <hr />
+
+        <div class="macros">
+          <table>
+            <thead>
+              <tr>
+                <th>Macros</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td><code>[query]</code></td><td>Keyword</td></tr>
+              <tr><td><code>[subid]</code></td><td>SubID</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <footer class="modal-actions">
+        <button type="button" class="btn secondary" data-dismiss="close">Close</button>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById("endpointModal");
+    const feedUrlInput = document.getElementById("feedUrl");
+    const feedTitle = document.getElementById("feedTitle");
+
+    document.addEventListener("click", (e) => {
+      const btn = e.target.closest(".btn.endpoints");
+      if (btn) {
+        const row = btn.closest("tr");
+        const feedId = row.children[1].textContent.trim();
+        const engine = row.children[3].textContent.trim();
+        const url = `https://${feedId}.us.searchfeedarb.com/search/?sid=${feedId}&query=[query]`;
+
+        feedUrlInput.value = url;
+        feedTitle.textContent = `Feed Endpoints — ${engine} (ID: ${feedId})`;
+        modal.classList.add("show");
+      }
+
+      if (
+        e.target.dataset.dismiss === "close" ||
+        e.target.classList.contains("modal")
+      ) {
+        modal.classList.remove("show");
+      }
+    });
+  </script>
+</body>
+</html>
