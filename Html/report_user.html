@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="../Css/Report_Admin.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+</head>
+
+<body>
+  <!-- ===== Top Header ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <img class="logo" src="../Images/logo.png" alt="Site logo" />
+
+      <div class="brand">
+        <span class="brand-title">Ads Click</span>
+        <span class="brand-tagline">Boost Your Reach</span>
+      </div>
+
+      <nav class="header-nav">
+         <div class="top-right">
+      <span class="user-icon"><i class="fa-solid fa-user"></i></span>
+      <span class="company-name">3D Tech Limited </span>
+    </div>
+        <button class="logout-btn">Logout</button>
+      </nav>
+    </div>
+
+  <!-- ===== Navigation ===== -->
+  <nav class="nav-bar" aria-label="Main navigation">
+    <ul>
+        <li><a href="../Html/DashBoard_User.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+        <li><a href="../Html/Profile_user.html"><i class="fa-solid fa-user"></i> My Profile</a></li>
+        <li><a href="../Html/report_user.html"><i class="fa-solid fa-chart-line"></i> Reports</a></li>
+        <li><a href="../Html/Documentation_user.html"><i class="fa-solid fa-book"></i> Documentation</a></li>
+      </ul>
+  </nav>
+</header>
+
+<main id="main-content" class="page-wrap" role="main">
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li>Reports</li>
+        <li class="sep">/</li>
+        <li aria-current="page">Search Statistics</li>
+      </ol>
+    </nav>
+
+    <!-- Page title -->
+    <header class="page-header">
+      <h1>Search Statistics</h1>
+    </header>
+
+    <!-- Filters card -->
+    <section class="card filters-card" aria-labelledby="filters-heading">
+      <div class="card-header">
+        <h2 id="filters-heading">Filters</h2>
+        <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="filters-body" title="Toggle">
+          <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+          <span class="sr-only">Toggle filters</span>
+        </button>
+      </div>
+
+      <div id="filters-body" class="card-body filters-grid">
+        <div class="field">
+          <label for="dateInterval">Date Interval</label>
+          <select id="dateInterval" name="dateInterval">
+            <option value="date">Date</option>
+            <option value="hour">Hour</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="timezone">Timezone</label>
+          <select id="timezone" name="timezone">
+            <option value="UTC">(UTC +00:00) UTC</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="groupBy">Group By</label>
+          <select id="groupBy" name="groupBy">
+            <option value="publisher-link">Publisher, Link Name</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="accounts">Accounts</label>
+          <select id="accounts" name="accounts" aria-placeholder="Nothing selected">
+            <option value="">Nothing selected</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="links">Links</label>
+          <select id="links" name="links" aria-placeholder="Nothing selected">
+            <option value="">Nothing selected</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Controls (date, reload, tabs) -->
+    <section class="controls-card card" aria-label="Controls">
+      <div class="controls-row">
+
+        <div class="left-controls">
+          <label for="quickRange" class="sr-only">Quick range</label>
+          <select id="quickRange" class="quick-range" aria-label="Quick date range">
+            <option value="today">Today</option>
+            <option value="yesterday">Yesterday</option>
+            <option value="this-week">This week</option>
+          </select>
+        </div>
+
+        <div class="center-controls">
+          <label for="fromDate" class="sr-only">From date</label>
+          <input type="date" id="fromDate" class="date-input" name="fromDate" />
+          <label for="toDate" class="sr-only">To date</label>
+          <input type="date" id="toDate" class="date-input" name="toDate" />
+        </div>
+
+        <div class="right-controls">
+          <button type="button" class="reload-btn" id="reloadBtn" title="Reload">
+            <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i> Reload
+          </button>
+        </div>
+      </div>
+
+      <div class="action-tabs" role="tablist" aria-label="Table actions">
+        <button type="button" class="tab active" role="tab" aria-selected="true">Column visibility</button>
+        <button type="button" class="tab" role="tab">Export CSV</button>
+        <button type="button" class="tab" role="tab">Links</button>
+        <button type="button" class="tab" role="tab">Country</button>
+        <button type="button" class="tab" role="tab">OS</button>
+        <button type="button" class="tab" role="tab">Browser</button>
+        <button type="button" class="tab" role="tab">Device</button>
+        <button type="button" class="tab" role="tab">Domains</button>
+        <button type="button" class="tab" role="tab">Keyword</button>
+
+        <div class="show-entries" aria-hidden="false">
+          <label for="showEntries">Show</label>
+          <select id="showEntries" name="showEntries">
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+          <span>entries</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Data table -->
+    <section class="card table-card" aria-labelledby="results-heading">
+      <h2 id="results-heading" class="sr-only">Results</h2>
+
+      <div class="table-wrap">
+        <table class="stats-table" aria-describedby="table-desc">
+          <caption id="table-desc">Search statistics results</caption>
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Account</th>
+              <th scope="col">Link Name</th>
+              <th scope="col" class="numeric">Searches</th>
+              <th scope="col" class="numeric">Valid</th>
+              <th scope="col" class="numeric">Errors</th>
+              <th scope="col" class="numeric">Monetized</th>
+              <th scope="col" class="numeric">Unique IPs</th>
+              <th scope="col" class="numeric">Visitors</th>
+              <th scope="col" class="numeric">CTR</th>
+              <th scope="col" class="numeric">Coverage</th>
+              <th scope="col" class="numeric">Clicks</th>
+              <th scope="col" class="numeric">EPC</th>
+              <th scope="col" class="numeric">RPM</th>
+              <th scope="col" class="numeric">Revenue</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr class="empty-row">
+              <td colspan="15">No data available in table</td>
+            </tr>
+          </tbody>
+
+          <tfoot>
+            <tr class="totals-row">
+              <td>Total</td>
+              <td></td>
+              <td></td>
+              <td class="numeric">0</td>
+              <td class="numeric">0</td>
+              <td class="numeric">0</td>
+              <td class="numeric"></td>
+              <td class="numeric">0</td>
+              <td class="numeric">0</td>
+              <td class="numeric"></td>
+              <td class="numeric"></td>
+              <td class="numeric">0</td>
+              <td class="numeric"></td>
+              <td class="numeric"></td>
+              <td class="numeric">$0.00</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div class="table-footer">
+        <div class="entries-info" aria-live="polite">Showing 0 to 0 of 0 entries</div>
+        <div class="pagination" role="navigation" aria-label="Pagination">
+          <button type="button" class="page-btn">First</button>
+          <button type="button" class="page-btn">Previous</button>
+          <button type="button" class="page-btn">Next</button>
+          <button type="button" class="page-btn">Last</button>
+        </div>
+      </div>
+    </section>
+  </div> 
+</main> 
+
+<script>
+  // run after DOM is ready and guard against missing elements
+  document.addEventListener('DOMContentLoaded', function () {
+    const fromInput = document.getElementById('fromDate');
+    const toInput = document.getElementById('toDate');
+    const reloadBtn = document.getElementById('reloadBtn');
+
+    // default date inputs to today if inputs exist
+    const today = new Date().toISOString().slice(0,10);
+    if (fromInput) fromInput.value = today;
+    if (toInput) toInput.value = today;
+
+    // Reload button (placeholder)
+    if (reloadBtn) {
+      reloadBtn.addEventListener('click', () => {
+        // In a real app you'd fetch filtered data here.
+        console.log('Reloading data for', fromInput?.value, 'to', toInput?.value);
+        // Keep this a non-blocking UI hint for demo
+        if (window.toast) {
+          // If your app provides a toast function, use it
+          window.toast('Reload pressed (demo)');
+        } else {
+          console.info('Reload pressed (demo)');
+        }
+      });
+    }
+
+    // Simple collapse behaviour for filters panel
+    const collapseBtn = document.querySelector('.collapse-btn');
+    const filtersBody = document.getElementById('filters-body');
+    if (collapseBtn && filtersBody) {
+      collapseBtn.addEventListener('click', () => {
+        const expanded = collapseBtn.getAttribute('aria-expanded') === 'true';
+        collapseBtn.setAttribute('aria-expanded', String(!expanded));
+        filtersBody.hidden = expanded;
+        // rotate icon (if you have CSS to animate)
+        collapseBtn.classList.toggle('collapsed', !expanded);
+      });
+    }
+  });
+</script>
+</body>
+</html>

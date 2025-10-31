@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="../Css/Report_Admin.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+</head>
+
+<body>
+  <!-- ===== Top Header ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <img class="logo" src="../Images/logo.png" alt="Site logo" />
+
+      <div class="brand">
+        <span class="brand-title">Ads Click</span>
+        <span class="brand-tagline">Boost Your Reach</span>
+      </div>
+
+      <nav class="header-nav">
+         <div class="top-right">
+      <span class="user-icon"><i class="fa-solid fa-user"></i></span>
+      <span class="company-name">3D Tech Limited </span>
+    </div>
+        <button class="logout-btn">Logout</button>
+      </nav>
+    </div>
+
+    <!-- ===== Navigation ===== -->
+    <nav class="nav-bar" aria-label="Main navigation">
+    <ul>
+      <li><a href="../Html/DashBoard_Admin.Html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+      <li><a href="../Html/Profile_admin.html"><i class="fa-solid fa-user"></i> Profile</a></li>
+      <li><a href="../Html/Report_Admin.html"><i class="fa-solid fa-chart-line"></i> Reports</a></li>
+      <li><a href="../Html/Documentation_Admin.html"><i class="fa-solid fa-book"></i> Documentation</a></li>
+    </ul>
+  </nav>
+  </header>
+
+
+<main id="main-content" class="page-wrap" role="main">
+  <div class="container">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li>Reports</li>
+        <li class="sep">/</li>
+        <li aria-current="page">Search Statistics</li>
+      </ol>
+    </nav>
+<!-- Report Section with button inside -->
+<section id="reportSection" class="report-section">
+  <h2>📋 Report Summary</h2>
+  <p>
+    View and manage your activity reports here. Click the button below to open the detailed report form 
+    and review important performance insights or submit a new report.
+  </p>
+
+  <button type="button" id="openReportBtn" class="report-btn" title="Open report form">
+    <i class="fa-solid fa-file-lines" aria-hidden="true"></i> Open Report
+  </button>
+</section>
+
+    <!-- Page title -->
+    <header class="page-header">
+      <h1>Search Statistics</h1>
+    </header>
+
+    <!-- Filters card -->
+    <section class="card filters-card" aria-labelledby="filters-heading">
+      <div class="card-header">
+        <h2 id="filters-heading">Filters</h2>
+        <button type="button" class="collapse-btn" aria-expanded="true" aria-controls="filters-body" title="Toggle">
+          <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+          <span class="sr-only">Toggle filters</span>
+        </button>
+      </div>
+
+      <div id="filters-body" class="card-body filters-grid">
+        <div class="field">
+          <label for="dateInterval">Date Interval</label>
+          <select id="dateInterval" name="dateInterval">
+            <option value="date">Date</option>
+            <option value="hour">Hour</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="timezone">Timezone</label>
+          <select id="timezone" name="timezone">
+            <option value="UTC">(UTC +00:00) UTC</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="groupBy">Group By</label>
+          <select id="groupBy" name="groupBy">
+            <option value="publisher-link">Publisher, Link Name</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="accounts">Accounts</label>
+          <select id="accounts" name="accounts" aria-placeholder="Nothing selected">
+            <option value="">Nothing selected</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="links">Links</label>
+          <select id="links" name="links" aria-placeholder="Nothing selected">
+            <option value="">Nothing selected</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Controls (date, reload, tabs) -->
+    <section class="controls-card card" aria-label="Controls">
+      <div class="controls-row">
+
+        <div class="left-controls">
+          <label for="quickRange" class="sr-only">Quick range</label>
+          <select id="quickRange" class="quick-range" aria-label="Quick date range">
+            <option value="today">Today</option>
+            <option value="yesterday">Yesterday</option>
+            <option value="this-week">This week</option>
+          </select>
+        </div>
+
+        <div class="center-controls">
+          <label for="fromDate" class="sr-only">From date</label>
+          <input type="date" id="fromDate" class="date-input" name="fromDate" />
+          <label for="toDate" class="sr-only">To date</label>
+          <input type="date" id="toDate" class="date-input" name="toDate" />
+        </div>
+
+        <div class="right-controls">
+         
+
+          <button type="button" class="reload-btn" id="reloadBtn" title="Reload">
+            <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i> Reload
+          </button>
+        </div>
+      </div>
+
+      <div class="action-tabs" role="tablist" aria-label="Table actions">
+        <button type="button" class="tab active" role="tab" aria-selected="true">Column visibility</button>
+        <button type="button" class="tab" role="tab">Export CSV</button>
+        <button type="button" class="tab" role="tab">Links</button>
+        <button type="button" class="tab" role="tab">Country</button>
+        <button type="button" class="tab" role="tab">OS</button>
+        <button type="button" class="tab" role="tab">Browser</button>
+        <button type="button" class="tab" role="tab">Device</button>
+        <button type="button" class="tab" role="tab">Domains</button>
+        <button type="button" class="tab" role="tab">Keyword</button>
+
+        <div class="show-entries" aria-hidden="false">
+          <label for="showEntries">Show</label>
+          <select id="showEntries" name="showEntries">
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+          </select>
+          <span>entries</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Data table -->
+    <section class="card table-card" aria-labelledby="results-heading">
+      <h2 id="results-heading" class="sr-only">Results</h2>
+
+      <div class="table-wrap">
+        <table class="stats-table" aria-describedby="table-desc">
+          <caption id="table-desc">Search statistics results</caption>
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Account</th>
+              <th scope="col">Link Name</th>
+              <th scope="col" class="numeric">Searches</th>
+              <th scope="col" class="numeric">Valid</th>
+              <th scope="col" class="numeric">Errors</th>
+              <th scope="col" class="numeric">Monetized</th>
+              <th scope="col" class="numeric">Unique IPs</th>
+              <th scope="col" class="numeric">Visitors</th>
+              <th scope="col" class="numeric">CTR</th>
+              <th scope="col" class="numeric">Coverage</th>
+              <th scope="col" class="numeric">Clicks</th>
+              <th scope="col" class="numeric">EPC</th>
+              <th scope="col" class="numeric">RPM</th>
+              <th scope="col" class="numeric">Revenue</th>
+                    <th scope="col">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr class="empty-row">
+              <td colspan="15">No data available in table</td>
+              <td class="action-buttons">
+              <button class="edit-btn" title="Edit"><i class="fa fa-edit"></i> Edit</button>
+              <button class="delete-btn" title="Delete"><i class="fa fa-trash"></i> Delete</button>
+              </td>
+            </tr>
+          </tbody>
+
+          <tfoot>
+            <tr class="totals-row">
+              <td>Total</td>
+              <td></td>
+              <td></td>
+              <td class="numeric">0</td>
+              <td class="numeric">0</td>
+              <td class="numeric">0</td>
+              <td class="numeric"></td>
+              <td class="numeric">0</td>
+              <td class="numeric">0</td>
+              <td class="numeric"></td>
+              <td class="numeric"></td>
+              <td class="numeric">0</td>
+              <td class="numeric"></td>
+              <td class="numeric"></td>
+              <td class="numeric">$0.00</td>
+              
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+
+      <div class="table-footer">
+        <div class="entries-info" aria-live="polite">Showing 0 to 0 of 0 entries</div>
+        <div class="pagination" role="navigation" aria-label="Pagination">
+          <button type="button" class="page-btn">First</button>
+          <button type="button" class="page-btn">Previous</button>
+          <button type="button" class="page-btn">Next</button>
+          <button type="button" class="page-btn">Last</button>
+        </div>
+      </div>
+    </section>
+
+  </div> 
+</main> 
+
+<!-- Single modal instance (clean, no duplicates) -->
+<div id="reportOverlay" class="report-overlay" hidden>
+  <div class="report-backdrop" id="reportBackdrop" tabindex="-1"></div>
+
+  <div class="report-panel" role="dialog" aria-modal="true" aria-labelledby="reportTitle" aria-describedby="reportDesc">
+    <!-- Header -->
+    <div class="report-header">
+      <h3 id="reportTitle"><i class="fa-solid fa-file-lines"></i> Create / Edit Report</h3>
+      <button class="report-close" id="closeReportBtn" aria-label="Close dialog" type="button"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <!-- Body -->
+    <div class="report-body" id="reportDesc">
+      <form id="reportForm" novalidate>
+        <!-- Basic Info -->
+        <div class="form-section">
+          <div class="form-group full">
+            <label for="reportName">Report Name</label>
+            <input id="reportName" name="reportName" type="text" placeholder="Monthly Clicks Summary" required />
+          </div>
+
+          <div class="form-row" style="display:flex;gap:12px">
+            <div class="form-group">
+              <label for="reportFrom">From</label>
+              <input id="reportFrom" name="reportFrom" type="date" />
+            </div>
+            <div class="form-group">
+              <label for="reportTo">To</label>
+              <input id="reportTo" name="reportTo" type="date" />
+            </div>
+          </div>
+
+          <div class="form-row" style="margin-top:12px;">
+            <div class="form-group full" id="accountsFormGroup">
+              <label>Accounts</label>
+              <div>
+                <button type="button" id="addAccountBtn">+ Add account</button>
+                <small class="helper-text">Click to add a full per-account form (filters + stats). Max 10.</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Container where per-account full blocks will be appended (single element) -->
+        <div id="accountsContainer" aria-live="polite"></div>
+
+        <!-- Global Type & Notes -->
+        <div class="form-section" style="margin-top:14px;">
+          <div class="form-group full">
+            <label for="reportType">Report Type</label>
+            <select id="reportType" name="reportType">
+              <option value="summary">Summary</option>
+              <option value="detailed">Detailed</option>
+              <option value="csv">CSV Export</option>
+            </select>
+          </div>
+
+          <div class="form-group full">
+            <label for="reportNote">Notes / Filters</label>
+            <textarea id="reportNote" name="reportNote" placeholder="Add filters or notes" rows="3"></textarea>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Footer -->
+    <div class="report-footer" style="display:flex;gap:12px;padding:12px;border-top:1px solid #eee;justify-content:flex-end">
+      <button type="button" class="report-cancel" id="reportCancelBtn">Cancel</button>
+      <button type="submit" form="reportForm" class="report-submit" id="reportSubmitBtn"><i class="fa-solid fa-paper-plane"></i> Create & Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  // Run after DOM is ready to ensure all elements exist
+  document.addEventListener('DOMContentLoaded', () => {
+
+    // Elements
+    const openBtn = document.getElementById('openReportBtn');
+    const overlay = document.getElementById('reportOverlay');
+    const backdrop = document.getElementById('reportBackdrop');
+    const closeBtn = document.getElementById('closeReportBtn');
+    const cancelBtn = document.getElementById('reportCancelBtn');
+    const reportForm = document.getElementById('reportForm');
+    const addAccountBtn = document.getElementById('addAccountBtn');
+    const accountsContainer = document.getElementById('accountsContainer');
+    const submitBtn = document.getElementById('reportSubmitBtn');
+
+    const MAX_ACCOUNTS = 10;
+    let lastFocused = null;
+
+    // Create a full per-account form block
+    function createAccountBlock(index, initialAccountName = '') {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'account-block';
+      wrapper.dataset.index = index;
+      wrapper.style.border = '1px solid #ddd';
+      wrapper.style.padding = '12px';
+      wrapper.style.marginBottom = '10px';
+      wrapper.style.borderRadius = '8px';
+
+      // Header with account name input + controls
+      const header = document.createElement('div');
+      header.style.display = 'flex';
+      header.style.gap = '8px';
+      header.style.alignItems = 'center';
+      header.style.marginBottom = '8px';
+
+      const accLabel = document.createElement('label');
+      // "for" must match the id of the input
+      accLabel.setAttribute('for', `reportAccounts-${index}-accountName`);
+      accLabel.textContent = 'Account';
+
+      const accInput = document.createElement('input');
+      accInput.type = 'text';
+      accInput.name = `reportAccounts[${index}][accountName]`;
+      accInput.id = `reportAccounts-${index}-accountName`;
+      accInput.placeholder = 'Account name';
+      accInput.value = initialAccountName;
+      accInput.required = index === 0; // require at least first one
+
+      // Buttons
+      const btns = document.createElement('div');
+      btns.style.marginLeft = 'auto';
+      btns.style.display = 'flex';
+      btns.style.gap = '6px';
+
+      const toggleBtn = document.createElement('button');
+      toggleBtn.type = 'button';
+      toggleBtn.textContent = 'Hide';
+      toggleBtn.title = 'Show/hide account fields';
+
+      const removeBtn = document.createElement('button');
+      removeBtn.type = 'button';
+      removeBtn.textContent = 'Remove';
+      removeBtn.title = 'Remove this account';
+
+      btns.appendChild(toggleBtn);
+      btns.appendChild(removeBtn);
+
+      header.appendChild(accLabel);
+      header.appendChild(accInput);
+      header.appendChild(btns);
+
+      // Content: Additional Filters (per-account)
+      const content = document.createElement('div');
+      content.className = 'account-content';
+
+      // Build filters HTML (use innerHTML for convenience)
+      content.innerHTML = `
+        <div class="form-section">
+          <h4>Additional Filters</h4>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Column visibility</label>
+              <input type="text" name="reportAccounts[${index}][columnVisibility]" placeholder="Enter columns" />
+            </div>
+
+            <div class="form-group">
+              <label>Links</label>
+              <input type="text" name="reportAccounts[${index}][links]" placeholder="Enter links" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Country</label>
+              <input type="text" name="reportAccounts[${index}][country]" placeholder="Enter country" />
+            </div>
+            <div class="form-group">
+              <label>OS</label>
+              <input type="text" name="reportAccounts[${index}][os]" placeholder="Enter OS" />
+            </div>
+            <div class="form-group">
+              <label>Browser</label>
+              <input type="text" name="reportAccounts[${index}][browser]" placeholder="Enter browser" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Device</label>
+              <input type="text" name="reportAccounts[${index}][device]" placeholder="Enter device" />
+            </div>
+            <div class="form-group">
+              <label>Domains</label>
+              <input type="text" name="reportAccounts[${index}][domains]" placeholder="Enter domains" />
+            </div>
+            <div class="form-group">
+              <label>Keyword</label>
+              <input type="text" name="reportAccounts[${index}][keyword]" placeholder="Enter keyword" />
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <h4>Stats</h4>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Searches</label>
+              <input type="number" name="reportAccounts[${index}][searches]" min="0" placeholder="Enter number of searches" />
+            </div>
+            <div class="form-group">
+              <label>Valid</label>
+              <input type="number" name="reportAccounts[${index}][valid]" min="0" placeholder="Enter valid searches" />
+            </div>
+            <div class="form-group">
+              <label>Errors</label>
+              <input type="number" name="reportAccounts[${index}][errors]" min="0" placeholder="Enter number of errors" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Monetized</label>
+              <input type="number" name="reportAccounts[${index}][monetized]" min="0" placeholder="Enter monetized searches" />
+            </div>
+            <div class="form-group">
+              <label>Unique IPs</label>
+              <input type="number" name="reportAccounts[${index}][uniqueIps]" min="0" placeholder="Enter number of unique IPs" />
+            </div>
+            <div class="form-group">
+              <label>Visitors</label>
+              <input type="number" name="reportAccounts[${index}][visitors]" min="0" placeholder="Enter number of visitors" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>CTR (%)</label>
+              <input type="text" name="reportAccounts[${index}][ctr]" placeholder="e.g., 12.5%" />
+            </div>
+            <div class="form-group">
+              <label>Coverage (%)</label>
+              <input type="text" name="reportAccounts[${index}][coverage]" placeholder="e.g., 98%" />
+            </div>
+            <div class="form-group">
+              <label>Clicks</label>
+              <input type="number" name="reportAccounts[${index}][clicks]" min="0" placeholder="Clicks" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>EPC ($)</label>
+              <input type="text" name="reportAccounts[${index}][epc]" placeholder="0.45" />
+            </div>
+            <div class="form-group">
+              <label>RPM ($)</label>
+              <input type="text" name="reportAccounts[${index}][rpm]" placeholder="3.25" />
+            </div>
+            <div class="form-group">
+              <label>Revenue ($)</label>
+              <input type="text" name="reportAccounts[${index}][revenue]" placeholder="15.30" />
+            </div>
+          </div>
+        </div>
+      `;
+
+      // Wire toggle and remove
+      toggleBtn.addEventListener('click', () => {
+        if (content.style.display === 'none') {
+          content.style.display = '';
+          toggleBtn.textContent = 'Hide';
+        } else {
+          content.style.display = 'none';
+          toggleBtn.textContent = 'Show';
+        }
+      });
+
+      removeBtn.addEventListener('click', () => {
+        wrapper.remove();
+        reindexAccountBlocks();
+      });
+
+      // Assemble wrapper
+      wrapper.appendChild(header);
+      wrapper.appendChild(content);
+
+      return wrapper;
+    }
+
+    // Reindex account blocks' names and ids after a remove or add
+    function reindexAccountBlocks() {
+      const blocks = accountsContainer.querySelectorAll('.account-block');
+      blocks.forEach((blk, idx) => {
+        blk.dataset.index = idx;
+        // update names and ids inside block
+        const inputs = blk.querySelectorAll('input, select, textarea');
+        inputs.forEach(inp => {
+          if (inp.name && inp.name.includes('reportAccounts[')) {
+            inp.name = inp.name.replace(/reportAccounts\[\d+\]/, `reportAccounts[${idx}]`);
+          }
+          // update accountName id
+          if (inp.name === `reportAccounts[${idx}][accountName]` || (inp.id && inp.id.indexOf('reportAccounts-') === 0)) {
+            inp.id = `reportAccounts-${idx}-accountName`;
+          }
+        });
+        // update labels' for attributes (account label)
+        const labels = blk.querySelectorAll('label');
+        labels.forEach(lbl => {
+          const forAttr = lbl.getAttribute('for');
+          if (forAttr && forAttr.indexOf('reportAccounts-') === 0) {
+            lbl.setAttribute('for', `reportAccounts-${idx}-accountName`);
+          }
+        });
+        // ensure first accountName input is required
+        const accName = blk.querySelector(`input[name="reportAccounts[${idx}][accountName]"]`);
+        if (accName) accName.required = idx === 0;
+      });
+
+      // update add button disabled state
+      addAccountBtn.disabled = blocks.length >= MAX_ACCOUNTS;
+    }
+
+    // Add account block (public action)
+    function addAccount(initialName = '') {
+      const count = accountsContainer.querySelectorAll('.account-block').length;
+      if (count >= MAX_ACCOUNTS) {
+        alert('Maximum accounts reached');
+        return;
+      }
+      const block = createAccountBlock(count, initialName);
+      accountsContainer.appendChild(block);
+      // focus the account name input
+      const accInput = block.querySelector(`input[name="reportAccounts[${count}][accountName]"]`);
+      accInput && accInput.focus();
+      reindexAccountBlocks();
+    }
+
+    // Parse FormData to nested object for keys like reportAccounts[0][searches]
+    function formDataToNestedObject(fd) {
+      const out = {};
+      for (const [rawKey, value] of fd.entries()) {
+        const parts = rawKey.match(/([^\[\]]+)/g) || [];
+        let cur = out;
+        for (let i = 0; i < parts.length; i++) {
+          const part = parts[i];
+          const isLast = i === parts.length - 1;
+          const next = parts[i + 1];
+          const nextIsIndex = /^\d+$/.test(next);
+          if (isLast) {
+            if (/^\d+$/.test(part)) {
+              // numeric key into array
+              if (!Array.isArray(cur)) cur = [];
+              cur[Number(part)] = value;
+            } else {
+              if (cur[part] !== undefined) {
+                if (!Array.isArray(cur[part])) cur[part] = [cur[part]];
+                cur[part].push(value);
+              } else {
+                cur[part] = value;
+              }
+            }
+          } else {
+            if (/^\d+$/.test(part)) {
+              // numeric segment - treat cur as array
+              if (!Array.isArray(cur)) {
+                // convert to array if necessary (this only affects the local `cur` reference)
+                cur = [];
+              }
+              if (cur[Number(part)] === undefined) {
+                cur[Number(part)] = nextIsIndex ? [] : {};
+              }
+              cur = cur[Number(part)];
+            } else {
+              if (cur[part] === undefined) {
+                cur[part] = nextIsIndex ? [] : {};
+              }
+              cur = cur[part];
+            }
+          }
+        }
+      }
+      return out;
+    }
+
+    // Modal open / close with focus restore
+    function openModal() {
+      lastFocused = document.activeElement;
+      if (overlay) {
+        overlay.hidden = false;
+      }
+      setTimeout(() => {
+        // focus first accountName input if exists, otherwise reportName
+        const firstAcc = accountsContainer.querySelector('input[name^="reportAccounts"]');
+        (firstAcc || document.getElementById('reportName')) && (firstAcc || document.getElementById('reportName')).focus();
+      }, 80);
+      document.addEventListener('keydown', onKeyDown);
+    }
+
+    function closeModal() {
+      if (overlay) {
+        overlay.hidden = true;
+      }
+      lastFocused && lastFocused.focus && lastFocused.focus();
+      document.removeEventListener('keydown', onKeyDown);
+    }
+
+    function onKeyDown(e) {
+      if (e.key === 'Escape') closeModal();
+      // you can add Tab trap here if needed
+    }
+
+    // Wire basic events
+    openBtn && openBtn.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
+    closeBtn && closeBtn.addEventListener('click', closeModal);
+    cancelBtn && cancelBtn.addEventListener('click', closeModal);
+    backdrop && backdrop.addEventListener('click', closeModal);
+
+    addAccountBtn && addAccountBtn.addEventListener('click', () => addAccount(''));
+
+    // Initialize: create one account block by default if container exists
+    if (accountsContainer) addAccount('');
+
+    // Submit handling: parse nested payload and log
+    submitBtn && submitBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (!reportForm) return;
+
+      // basic validation: reportName required
+      const reportNameEl = reportForm.querySelector('[name="reportName"]');
+      if (!reportNameEl || !reportNameEl.value.trim()) {
+        alert('Please enter a report name.');
+        reportNameEl && reportNameEl.focus();
+        return;
+      }
+
+      // collect form data
+      const fd = new FormData(reportForm);
+      const payload = formDataToNestedObject(fd);
+      console.log('Nested payload:', payload);
+
+      // demo feedback
+      alert('Form submitted (demo). See console for payload.');
+      closeModal();
+    });
+
+    // Wire edit buttons for table rows (prefill modal)
+    function wireEditButtons() {
+      const editButtons = document.querySelectorAll('.edit-btn');
+      if (!editButtons || editButtons.length === 0) return;
+
+      editButtons.forEach(btn => {
+        btn.addEventListener('click', function () {
+          const row = this.closest('tr');
+          if (!row) return;
+
+          // Open modal
+          openModal();
+
+          // Clear existing account blocks
+          if (accountsContainer) accountsContainer.innerHTML = '';
+
+          // Prefill report name (use cell[1], fallback to first cell text)
+          const reportNameCellText = row.cells[1]?.textContent?.trim() || row.cells[0]?.textContent?.trim() || '';
+          const reportNameEl = document.getElementById('reportName');
+          if (reportNameEl) reportNameEl.value = reportNameCellText ? (reportNameCellText + ' Report') : '';
+
+          // Prefill dates (demo: today as from/to)
+          const today = new Date().toISOString().split('T')[0];
+          const fromEl = document.getElementById('reportFrom');
+          const toEl = document.getElementById('reportTo');
+          if (fromEl) fromEl.value = today;
+          if (toEl) toEl.value = today;
+
+          // Create one account block per row (you can extend to multiple rows later)
+          const accountBlock = createAccountBlock(0, reportNameCellText);
+          
+          // Prefill account stats: cells starting at index 3
+          const fields = ['searches', 'valid', 'errors', 'monetized', 'uniqueIps', 'visitors', 'ctr', 'coverage', 'clicks', 'epc', 'rpm', 'revenue'];
+          fields.forEach((field, idx) => {
+            const selector = `input[name="reportAccounts[0][${field}]"]`;
+            const input = accountBlock.querySelector(selector);
+            if (input) {
+              // handle missing cell gracefully
+              const cellText = row.cells[3 + idx]?.textContent?.trim() || '';
+              input.value = cellText;
+            }
+          });
+
+          if (accountsContainer) {
+            accountsContainer.appendChild(accountBlock);
+            reindexAccountBlocks();
+          }
+        });
+      });
+    }
+
+    // Initial wiring for edit buttons (call now so dynamic rows will need re-run)
+    wireEditButtons();
+ // Simple collapse behaviour for filters panel
+    const collapseBtn = document.querySelector('.collapse-btn');
+    const filtersBody = document.getElementById('filters-body');
+    if (collapseBtn && filtersBody) {
+      collapseBtn.addEventListener('click', () => {
+        const expanded = collapseBtn.getAttribute('aria-expanded') === 'true';
+        collapseBtn.setAttribute('aria-expanded', String(!expanded));
+        filtersBody.hidden = expanded;
+        // rotate icon (if you have CSS to animate)
+        collapseBtn.classList.toggle('collapsed', !expanded);
+      });
+    }
+  });
+})();
+</script>
+</body>
+</html>

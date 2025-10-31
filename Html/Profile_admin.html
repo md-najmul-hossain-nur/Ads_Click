@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="../Css/Profile_admin.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+</head>
+
+<body>
+  <!-- ===== Top Header ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <img class="logo" src="../Images/logo.png" alt="Site logo" />
+
+      <div class="brand">
+        <span class="brand-title">Ads Click</span>
+        <span class="brand-tagline">Boost Your Reach</span>
+      </div>
+
+      <nav class="header-nav">
+         <div class="top-right">
+      <span class="user-icon"><i class="fa-solid fa-user"></i></span>
+      <span class="company-name">3D Tech Limited </span>
+    </div>
+        <button class="logout-btn">Logout</button>
+      </nav>
+    </div>
+
+    <!-- ===== Navigation ===== -->
+    <nav class="nav-bar" aria-label="Main navigation">
+    <ul>
+      <li><a href="../Html/DashBoard_Admin.Html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+      <li><a href="../Html/Profile_admin.html"><i class="fa-solid fa-user"></i> My Profile</a></li>
+      <li><a href="../Html/Report_Admin.html"><i class="fa-solid fa-chart-line"></i> Reports</a></li>
+      <li><a href="../Html/Documentation_Admin.html"><i class="fa-solid fa-book"></i> Documentation</a></li>
+    </ul>
+  </nav>
+  </header>
+  <main class="page">
+    <h1 class="page-title">Account Settings</h1>
+
+    <div class="grid">
+      <!-- LEFT COLUMN -->
+      <div class="col left">
+        <section class="panel">
+          <header class="panel-head">
+            <h2 class="panel-title">Login Info</h2>
+            <button class="chev" aria-hidden="true"><i class="fa fa-chevron-down"></i></button>
+          </header>
+          <div class="panel-body login-info">
+            <dl>
+              <div class="row">
+                <dt>Affiliate ID</dt>
+                <dd><span class="badge">174</span></dd>
+              </div>
+              <div class="row">
+                <dt>Username</dt>
+                <dd><span class="pill">3d tech limited</span></dd>
+              </div>
+              <div class="row">
+                <dt>Email</dt>
+                <dd><span class="pill">3dtechlimited@gmail.com</span></dd>
+              </div>
+            </dl>
+          </div>
+        </section>
+
+        <section class="panel">
+          <header class="panel-head">
+            <h2 class="panel-title">Payment Details</h2>
+            <button class="chev" aria-hidden="true"><i class="fa fa-chevron-down"></i></button>
+          </header>
+
+          <div class="panel-body">
+            <div class="form-row-inline">
+              <label class="inline-label">Method</label>
+              <div class="inline-control">
+                <select>
+                  <option>Nothing selected</option>
+                  <option>PayPal</option>
+                  <option>Bank transfer</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row-inline">
+              <label class="inline-label">Account</label>
+              <div class="inline-control">
+                <input type="text" placeholder="Payment Details" />
+              </div>
+            </div>
+          </div>
+        </section>
+      
+ <!-- Change Password -->
+        <section class="panel">
+          <header class="panel-head">
+            <h2 class="panel-title">Change Password</h2>
+            <button class="chev" aria-hidden="true"><i class="fa fa-chevron-down"></i></button>
+          </header>
+
+          <form class="panel-body change-pass" id="changePassForm" onsubmit="return false;">
+            <div class="form-row">
+              <label>Current Password</label>
+              <input type="password" name="currentPassword" placeholder="Current password" />
+            </div>
+
+            <div class="form-row">
+              <label>New Password</label>
+              <input type="password" name="newPassword" placeholder="New password" />
+            </div>
+
+            <div class="form-row">
+              <label>Confirm Password</label>
+              <input type="password" name="confirmPassword" placeholder="Confirm new password" />
+            </div>
+
+            <div class="form-actions">
+              <button class="btn-save small" id="changePassBtn" type="submit">Update password</button>
+            </div>
+          </form>
+        </section>
+
+        
+        
+        <!-- Add this section inside the LEFT COLUMN (.col.left) where you want the "My Profile" button to appear -->
+<section class="panel">
+  <header class="panel-head">
+    <h2 class="panel-title">Profile</h2>
+    <button class="chev" aria-hidden="true"><i class="fa fa-chevron-down"></i></button>
+  </header>
+
+  <div class="panel-body profile-section">
+    <p class="muted" style="margin:0 0 12px;">Quick access to your profile page and settings.</p>
+    <div class="profile-actions">
+      <!-- If you want this to navigate to a page, change href to your profile url -->
+      <a href="../Html/Profileviewuser.html" class="btn-profile" role="button">My Profile</a>
+    </div>
+  </div>
+</section>
+
+
+        </div>
+      <!-- RIGHT COLUMN -->
+      <aside class="col right">
+        <section class="panel small">
+          <header class="panel-head">
+            <h3 class="panel-title">Referrals Link</h3>
+            <button class="chev" aria-hidden="true"><i class="fa fa-chevron-down"></i></button>
+          </header>
+          <div class="panel-body">
+            <a class="ref-link" href="#">https://www.winkitsearch.com/signup.php?referrer=174</a>
+          </div>
+        </section>
+
+        <section class="panel small">
+          <header class="panel-head">
+            <h3 class="panel-title">Referrals List</h3>
+            <button class="chev" aria-hidden="true"><i class="fa fa-chevron-down"></i></button>
+          </header>
+          <div class="panel-body">
+            <em>No referrals yet</em>
+          </div>
+        </section>
+
+        <section class="panel tall">
+          <header class="panel-head">
+            <h2 class="panel-title">Personal Information</h2>
+            <button class="chev" aria-hidden="true"><i class="fa fa-chevron-down"></i></button>
+          </header>
+
+          <form class="panel-body form-grid" id="profileForm" onsubmit="return false;">
+            <div class="form-row">
+              <label>First Name</label>
+              <input type="text" placeholder="First Name" name="firstName" />
+            </div>
+
+            <div class="form-row">
+              <label>Last Name</label>
+              <input type="text" placeholder="Last name" name="lastName" />
+            </div>
+
+            <div class="form-row">
+              <label>Phone</label>
+              <input type="tel" placeholder="User Phone Number" name="phone" />
+            </div>
+
+            <div class="form-row">
+              <label>Skype</label>
+              <input type="text" placeholder="User Skype Name" name="skype" />
+            </div>
+
+            <div class="form-row">
+              <label>Company Name</label>
+              <input type="text" placeholder="Company Name" name="company" />
+            </div>
+
+            <div class="form-row">
+              <label>VAT</label>
+              <input type="text" placeholder="Company VAT Number" name="vat" />
+            </div>
+
+            <div class="form-row">
+              <label>Country</label>
+              <input type="text" placeholder="Country" name="country" />
+            </div>
+
+            <div class="form-row">
+              <label>Street Address</label>
+              <input type="text" placeholder="Street Address" name="address" />
+            </div>
+
+            <div class="form-row">
+              <label>City</label>
+              <input type="text" placeholder="City" name="city" />
+            </div>
+
+            <div class="form-row">
+              <label>State/Province</label>
+              <input type="text" placeholder="State/Province" name="state" />
+            </div>
+
+            <div class="form-row">
+              <label>ZIP Code</label>
+              <input type="text" placeholder="ZIP Code" name="zip" />
+            </div>
+
+            <div class="form-row">
+              <label>Timezone</label>
+              <select name="timezone">
+                <option>(UTC -00:00) UTC</option>
+                <option>(UTC -05:00) America/New_York</option>
+              </select>
+            </div>
+
+            <div class="form-actions">
+              <button class="btn-save" type="submit">Save changes</button>
+            </div>
+          </form>
+        </section>
+      </aside>
+    </div>
+  </main>
+
+  <!-- Optional: small script to toggle panel collapse -->
+  <script>
+    document.querySelectorAll('.panel .chev').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const panel = btn.closest('.panel');
+        panel.classList.toggle('collapsed');
+      });
+    });
+  </script>
+</body>
+</html>

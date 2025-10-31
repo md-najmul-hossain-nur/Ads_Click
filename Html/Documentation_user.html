@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="../Css/Documentation_user.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+</head>
+
+<body>
+  <!-- ===== Top Header ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <img class="logo" src="../Images/logo.png" alt="Site logo" />
+
+      <div class="brand">
+        <span class="brand-title">Ads Click</span>
+        <span class="brand-tagline">Boost Your Reach</span>
+      </div>
+
+      <nav class="header-nav">
+         <div class="top-right">
+      <span class="user-icon"><i class="fa-solid fa-user"></i></span>
+      <span class="company-name">3D Tech Limited </span>
+    </div>
+        <button class="logout-btn">Logout</button>
+      </nav>
+    </div>
+
+    <!-- ===== Navigation ===== -->
+    <nav class="nav-bar" aria-label="Main navigation">
+      <ul>
+        <li><a href="../Html/DashBoard_User.html"><i class="fa-solid fa-house"></i> Dashboard</a></li>
+        <li><a href="../Html/Profile_user.html"><i class="fa-solid fa-user"></i> My Profile</a></li>
+        <li><a href="../Html/report_user.html"><i class="fa-solid fa-chart-line"></i> Reports</a></li>
+        <li><a href="../Html/Documentation_user.html"><i class="fa-solid fa-book"></i> Documentation</a></li>
+      </ul>
+    </nav>
+  </header>
+ <main class="doc-container" id="main">
+    <section class="panel" aria-labelledby="overview-title">
+      <div class="panel-head">
+        <h2 id="overview-title" class="panel-title">Search API (V1) Overview</h2>
+      </div>
+
+      <div class="panel-body">
+        <p class="muted">
+          This API requires user authentication. You will need an API key to pass with your requests to provide authentication.
+        </p>
+
+        <div class="code-strip" aria-hidden="false">
+          <pre><code>https://www.winkitsearch.com/api.php?module=searchStats&method=getStats&aid=[AID]&key=[KEY]&date_from=[DATE_FROM]&date_to=[DATE_TO]&format=[FORMAT]</code></pre>
+        </div>
+
+        <h3 class="section-title">Request parameters</h3>
+
+        <table class="params" role="table" aria-label="Request parameters">
+          <tbody>
+            <tr>
+              <td class="param">AID</td>
+              <td class="value">Affiliate ID. In your case this should be <strong>174</strong> <span class="badge red">Required</span></td>
+            </tr>
+
+            <tr>
+              <td class="param">KEY</td>
+              <td class="value">Your API KEY <code>4b1bf945f0a69def1ceeb38554c374b403e9961f</code> <span class="badge red">Required</span></td>
+            </tr>
+
+            <tr>
+              <td class="param">DATE_FROM</td>
+              <td class="value">The start date to fetch report from. <span class="badge red">Required</span></td>
+            </tr>
+
+            <tr>
+              <td class="param">DATE_TO</td>
+              <td class="value">The end date to fetch report to. <span class="badge red">Required</span></td>
+            </tr>
+
+            <tr>
+              <td class="param">SID</td>
+              <td class="value">Your Feed ID <span class="badge blue">Optional</span></td>
+            </tr>
+
+            <tr>
+              <td class="param">FORMAT</td>
+              <td class="value">
+                Output format: <span class="badge blue">Optional</span>
+                <div class="format-list">
+                  <div><strong>json</strong> - JSON Format</div>
+                  <div><strong>csv</strong> - CSV Format</div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 class="section-title">Response parameters</h3>
+
+        <table class="params" role="table" aria-label="Response parameters">
+          <tbody>
+            <tr>
+              <td class="param">error_code</td>
+              <td class="value">Return error code</td>
+            </tr>
+            <tr>
+              <td class="param">error_msg</td>
+              <td class="value">Return error message</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Tab buttons -->
+        <div class="tab-controls" role="tablist" aria-label="Sample examples">
+          <button id="btn-request" role="tab" aria-selected="true" aria-controls="panel-request" class="tab-btn active">Sample API request</button>
+          <button id="btn-response" role="tab" aria-selected="false" aria-controls="panel-response" class="tab-btn">Sample API Response</button>
+        </div>
+
+        <!-- Panels -->
+        <div id="panel-request" role="tabpanel" aria-labelledby="btn-request" class="example-panel">
+          <div class="panel-tools">
+            <button class="copy-btn" data-target="req-code" type="button">Copy request</button>
+          </div>
+          <pre id="req-code" class="example-code"><code>GET https://www.winkitsearch.com/api.php?module=searchStats&amp;method=getStats&amp;aid=174&amp;key=4b1bf945f0a69def1ceeb38554c374b403e9961f&amp;date_from=2025-10-31&amp;date_to=2025-10-31&amp;format=json
+</code></pre>
+        </div>
+
+        <div id="panel-response" role="tabpanel" aria-labelledby="btn-response" class="example-panel hidden" hidden>
+          <div class="panel-tools">
+            <button class="copy-btn" data-target="res-code" type="button">Copy response</button>
+          </div>
+          <pre id="res-code" class="example-code"><code>{
+  "status": "ok",
+  "data": [
+    {
+      "date": "2025-10-31",
+      "clicks": 42,
+      "impressions": 1250,
+      "conversions": 3,
+      "revenue": 12.34
+    }
+  ],
+  "error_code": 0,
+  "error_msg": ""
+}
+</code></pre>
+        </div>
+
+        <div class="api-example-strip" aria-hidden="false">
+          <strong>API Example</strong>
+          <a class="api-link" href="https://www.winkitsearch.com/api.php?module=searchStats&method=getStats&aid=174&key=4b1bf945f0a69def1ceeb38554c374b403e9961f&date_from=2025-10-31&date_to=2025-10-31&format=json" target="_blank" rel="noopener">https://www.winkitsearch.com/api.php?module=searchStats&method=getStats&aid=174&key=4b1bf945f0a69def1ceeb38554c374b403e9961f&date_from=2025-10-31&date_to=2025-10-31&format=json</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="doc-container footer">
+    <small class="muted">Documentation generated • Search API (v1.00)</small>
+  </footer>
+
+  <!-- Script: keep in Js folder one level up -->
+  <script src="../javascript/Documentation_User.js"></script>
+</body>
+</html>
